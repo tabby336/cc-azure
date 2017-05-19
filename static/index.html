@@ -15,7 +15,7 @@
         </tr>
         <tr>
             <td align="right"><a href="https://www.microsoft.com/cognitive-services/en-us/sign-up" target="_blank">Subscription</a>:</td>
-            <!-- <td><input id="key" type="text" size="40" value="YOUR_BING_SPEECH_API_KEY"></td> -->
+            <td><input id="key" type="text" size="40" value="3e057acdb3254a6e944766609a2ebaee"></td>
         </tr>
         <tr>
             <td align="right">Laguage:</td>
@@ -73,7 +73,7 @@
     </script>
 
     <!-- SDK REFERENCE -->
-    <script src="distrib/speech.browser.sdk-min.js"></script>
+    <script src="../distrib\speech.browser.sdk-min.js"></script>
 
     <!-- SDK USAGE -->
     <script>
@@ -186,8 +186,8 @@
             });
 
             startBtn.addEventListener("click", function () {
-                if (!recognizer || previousSubscriptionKey != key) {
-                    previousSubscriptionKey = key;
+                if (!recognizer || previousSubscriptionKey != key.value) {
+                    previousSubscriptionKey = key.value;
                     Setup();
                 }
 
@@ -211,7 +211,7 @@
         });
 
         function Setup() {
-            recognizer = RecognizerSetup(SDK, SDK.RecognitionMode.Interactive, languageOptions.value, SDK.SpeechResultFormat[formatOptions.value], key);
+            recognizer = RecognizerSetup(SDK, SDK.RecognitionMode.Interactive, languageOptions.value, SDK.SpeechResultFormat[formatOptions.value], key.value);
         }
 
         function UpdateStatus(status) {
