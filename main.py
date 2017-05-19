@@ -23,7 +23,7 @@ def translate():
 
     # Call to Microsoft Translator Service
     headers = {"Authorization ": bearer_token}
-    translateUrl = "http://api.microsofttranslator.com/v2/Http.svc/Translate?text={}&to={}".format(request.json["text"], request.json["lang"])
+    translateUrl = "https://api.microsofttranslator.com/v2/Http.svc/Translate?text={}&to={}".format(request.json["text"], request.json["lang"])
 
     translationData = requests.get(translateUrl, headers = headers)
     # parse xml return values
