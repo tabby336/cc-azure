@@ -255,10 +255,15 @@
 	        	var result = "";
 	        	var ok = false;
 	        	console.log(text);
+                console.log(data);
+                language = document.getElementById("languageOptions").value;
+                translation = get_translation(text, "en-US");
+                console.log(translation);
+                //console.log(translated);
 	        	for (var i = 0; i < data.tags.length; ++i) {
 	        		name = data.tags[i]["name"];
 	        		tags.push(name);
-	        		if (text.search(name) != -1) {
+	        		if (translation.search(name) != -1) {
 	        			ok = true;
 	        			result += name + " ";
 	        		}
@@ -270,6 +275,22 @@
 	            alert("error");
 	        });
         }
+
+        function get_translation(text, lang) {
+            var translated = "paam"
+            $.ajax({
+                async: false,
+                url: '/translate',
+                type: 'POST',
+                contentType: 'application/json',
+                data: '{"text": "' +text+'", "lang": "' + lang + '"}',
+                success: function(data) {
+                    //console.log(data);
+                    translated = data.text;
+                }
+            });
+            return translated;
+        };
 
         function UpdateRecognizedPhrase(json) {
             language = document.getElementById("languageOptions").value;
