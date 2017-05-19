@@ -14,11 +14,12 @@
                 <h2 style="font-weight:500;">Microsoft Cognitive Services</h2>
             </td>
         </tr>
-        <tr>
-            <td align="right"><a href="https://www.microsoft.com/cognitive-services/en-us/sign-up" target="_blank">Subscription</a>:</td>
-            <td><input id="key" type="text" size="40" value="3e057acdb3254a6e944766609a2ebaee"></td>
+        <tr style="display: none;">
+            <td ><a href="https://www.microsoft.com/cognitive-services/en-us/sign-up" target="_blank">Subscription</a>:</td>
+            <td ><input id="key" type="text" size="40" value="3e057acdb3254a6e944766609a2ebaee"></td>
         </tr>
-            <td><input id="picture_url" type="text" size="40" value="url"></td>
+        	<td align="right">Photo url:</td>
+            <td><input id="picture_url" type="text" size="40" value=""></td>
         <tr>
         </tr>
         <tr>
@@ -51,11 +52,11 @@
                 <button id="stopBtn" disabled="disabled">Stop</button>
             </td>
         </tr>
-        <tr>
+        <tr style="display: none;">
             <td></td>
             <td>Current hypothesis: <span id="hypothesisDiv"></span></td>
         </tr>
-        <tr>
+        <tr style="display: none;">
             <td></td>
             <td>
                 <textarea id="phraseDiv" style="width:500px;height:200px"></textarea>
@@ -64,6 +65,8 @@
         <tr>
             <td></td>
             <td>Status: <span id="statusDiv"></span></td>
+        </tr>
+         <tr id="result">
         </tr>
     </table>
 
@@ -231,7 +234,7 @@
             stopBtn.disabled = true;
         }
 
-        function get_tags(url) {
+        function get_tags(url, text) {
         	 var params = {
 	            "visualFeatures": "Categories, Tags, Description, Faces, Adult",
 	        };
@@ -249,11 +252,19 @@
 	        })
 	        .done(function(data) {
 	        	var tags = [];
+	        	var result = "";
+	        	var ok = false;
+	        	console.log(text);
 	        	for (var i = 0; i < data.tags.length; ++i) {
-	        		tags.push(data.tags[i]["name"])
+	        		name = data.tags[i]["name"];
+	        		tags.push(name);
+	        		if (text.search(name) != -1) {
+	        			ok = true;
+	        			result += name + " ";
+	        		}
 	        	}
-	            console.log(tags)
-	            alert("success");
+	        	$("#result").html(result);
+	            // alert("success");
 	        })
 	        .fail(function() {
 	            alert("error");
@@ -263,8 +274,10 @@
         function UpdateRecognizedPhrase(json) {
             language = document.getElementById("languageOptions").value;
             picture_url = document.getElementById("picture_url").value;
-            console.log(picture_url);
-            get_tags(picture_url);
+            // console.log("*****************");
+            // console.log(JSON.parse(json)["DisplayText"]);
+            // console.log("*****************");
+            get_tags(picture_url, JSON.parse(json)["DisplayText"]);
         }
 
         function OnComplete() {
