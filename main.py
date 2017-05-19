@@ -1,9 +1,16 @@
-from flask import Flask
-app = Flask(__name__)
+from flask import Flask, jsonify, abort, request, make_response, url_for
+
+app = Flask(__name__, static_url_path = "", static_folder = "static")
 
 @app.route('/')
-def hello_world():
-  return 'Hello, World!!'
+def index():
+  return app.send_static_file('index.html')
+
+@app.route('/do_something', methods=['POST'])
+def do_something():
+	print "AM HERE"
+	print request 
+	return "bla"
 
 if __name__ == '__main__':
   app.run()
