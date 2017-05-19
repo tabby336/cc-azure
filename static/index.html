@@ -18,6 +18,9 @@
             <td align="right"><a href="https://www.microsoft.com/cognitive-services/en-us/sign-up" target="_blank">Subscription</a>:</td>
             <td><input id="key" type="text" size="40" value="3e057acdb3254a6e944766609a2ebaee"></td>
         </tr>
+            <td><input id="picture_url" type="text" size="40" value="url"></td>
+        <tr>
+        </tr>
         <tr>
             <td align="right">Laguage:</td>
             <td align="left">
@@ -228,7 +231,9 @@
         }
 
         function UpdateRecognizedPhrase(json) {
-            language = languageOptions = document.getElementById("languageOptions").value;
+            language = document.getElementById("languageOptions").value;
+            picture_url = document.getElementById("picture_url").value;
+            console.log(picture_url);
             
             $.ajax({
                 url: "/do_something",
