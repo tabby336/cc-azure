@@ -186,8 +186,8 @@
             });
 
             startBtn.addEventListener("click", function () {
-                if (!recognizer || previousSubscriptionKey != key.value) {
-                    previousSubscriptionKey = key.value;
+                if (!recognizer || previousSubscriptionKey != key) {
+                    previousSubscriptionKey = key;
                     Setup();
                 }
 
@@ -211,7 +211,7 @@
         });
 
         function Setup() {
-            recognizer = RecognizerSetup(SDK, SDK.RecognitionMode.Interactive, languageOptions.value, SDK.SpeechResultFormat[formatOptions.value], key.value);
+            recognizer = RecognizerSetup(SDK, SDK.RecognitionMode.Interactive, languageOptions.value, SDK.SpeechResultFormat[formatOptions.value], key);
         }
 
         function UpdateStatus(status) {
