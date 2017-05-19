@@ -165,6 +165,7 @@
 
     <!-- Browser Hooks -->
     <script>
+    	var tags;
         var startBtn, stopBtn, hypothesisDiv, phraseDiv, statusDiv, key, languageOptions, formatOptions;
         var SDK;
         var recognizer;
@@ -230,23 +231,40 @@
             stopBtn.disabled = true;
         }
 
+        function get_tags(url) {
+        	 var params = {
+	            "visualFeatures": "Categories, Tags, Description, Faces, Adult",
+	        };
+
+	        $.ajax({
+	            url: "https://westeurope.api.cognitive.microsoft.com/vision/v1.0/analyze?" + $.param(params),
+	            beforeSend: function(xhrObj){
+	                // Request headers
+	                xhrObj.setRequestHeader("Content-Type","application/json");
+	                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","e95356f3bde94d46aa05aea8c78e749b");
+	            },
+	            type: "POST",
+	            // Request body
+	            data: '{"url": "' + url + '"}'
+	        })
+	        .done(function(data) {
+	        	var tags = [];
+	        	for (var i = 0; i < data.tags.length; ++i) {
+	        		tags.push(data.tags[i]["name"])
+	        	}
+	            console.log(tags)
+	            alert("success");
+	        })
+	        .fail(function() {
+	            alert("error");
+	        });
+        }
+
         function UpdateRecognizedPhrase(json) {
             language = document.getElementById("languageOptions").value;
             picture_url = document.getElementById("picture_url").value;
             console.log(picture_url);
-            
-            $.ajax({
-                url: "/do_something",
-                type: "POST",
-                contentType: "application/json",
-                data: json,
-                success: function(data) {
-                    console.log("Am here")
-                    phraseDiv.innerHTML = json;
-            }
-        })
-             
-
+            get_tags(picture_url);
         }
 
         function OnComplete() {
