@@ -3,6 +3,7 @@
 <head>
     <title>Speech Sample</title>
     <meta charset="utf-8" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"> </script>
 </head>
 <body style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px;">
     <table width="100%">
@@ -227,7 +228,20 @@
         }
 
         function UpdateRecognizedPhrase(json) {
-             phraseDiv.innerHTML = json;
+            language = languageOptions = document.getElementById("languageOptions").value;
+            
+            $.ajax({
+                url: "/do_something",
+                type: "POST",
+                contentType: "application/json",
+                data: json,
+                success: function(data) {
+                    console.log("Am here")
+                    phraseDiv.innerHTML = json;
+            }
+        })
+             
+
         }
 
         function OnComplete() {

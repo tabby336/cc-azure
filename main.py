@@ -8,9 +8,14 @@ def index():
 
 @app.route('/do_something', methods=['POST'])
 def do_something():
-	print "AM HERE"
-	print request 
-	return "bla"
+	# print dir(request)
+	# print vars(request)
+	print request.get_json()
+	data = request.data
+	# print data
+	# data["caca"] = "caca"
+	return jsonify(data)
+	
 
 if __name__ == '__main__':
   app.run()
