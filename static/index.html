@@ -258,6 +258,7 @@
                 console.log(data);
                 language = document.getElementById("languageOptions").value;
                 translation = get_translation(text, "en-US");
+                console.log("PAAAMMMM")
                 console.log(translation);
                 // console.log(translated);
 	        	for (var i = 0; i < data.tags.length; ++i) {
@@ -277,7 +278,7 @@
         }
 
         function get_translation(text, lang) {
-            var translated = "paam"
+            translated = "paam"
             $.ajax({
                 async: false,
                 url: '/translate',
