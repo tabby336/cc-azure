@@ -279,17 +279,17 @@
 
         function get_translation(text, lang) {
             translated = "paam"
-            $.ajax({
-                async: false,
-                url: '/translate',
-                type: 'POST',
-                contentType: 'application/json',
-                data: '{"text": "' +text+'", "lang": "' + lang + '"}',
-                success: function(data) {
-                    //console.log(data);
-                    translated = data.text;
-                }
-            });
+            // $.ajax({
+            //     async: false,
+            //     url: '/translate',
+            //     type: 'POST',
+            //     contentType: 'application/json',
+            //     data: '{"text": "' +text+'", "lang": "' + lang + '"}',
+            //     success: function(data) {
+            //         //console.log(data);
+            //         translated = data.text;
+            //     }
+            // });
             return translated;
         };
 
