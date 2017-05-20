@@ -279,44 +279,18 @@
 
         function get_translation(text, lang) {
             translated = "paam"
-            // get credentials
-            $.ajax({
-                url: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken',
-                beforeSend: function(xhrObj) {
-                    // xhrObj.setRequestHeader("Content-Type","application/json");
-                    xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","41578f022a0841ee83364daf3e0e571c");
-                },
-                type: 'POST',
-                success: function(data) {
-
-                    console.log("token");
-                    //translated = data.text;
-                    bearer_token = 'Bearer ' + data;
-                    console.log(bearer_token);
-                    // headers = {"Authorization": bearer_token}
-                    translateUrl = 'http://api.microsofttranslator.com/v2/Http.svc/Translate?text=' + text + '&to=en&appId=' + bearer_token;
-                    console.log(translateUrl);
-
-                    $.ajax({
-                        url: encodeURI(translateUrl),
-                        // beforeSend: function(xhrObj) {
-                        //     xhrObj.setRequestHeader("Authorization ", "Bearer" + " " + data);
-                        //     xhrObj.setRequestHeader("appId ", "");
-                        // },
-                        // headers: {
-                        //     'Authorization': bearer_token
-                        // },
-                        type: 'GET',
-                        success: function(data) {
-                            console.log("Translateeeed");
-                            //xml = $.parseXML(data);
-                            console.log(data.getElementsByTagName('string'));
-                        }
-                    });
-
-                }
-            });
-            //return translated;
+            // $.ajax({
+            //     async: false,
+            //     url: '/translate',
+            //     type: 'POST',
+            //     contentType: 'application/json',
+            //     data: '{"text": "' +text+'", "lang": "' + lang + '"}',
+            //     success: function(data) {
+            //         //console.log(data);
+            //         translated = data.text;
+            //     }
+            // });
+            return translated;
         };
 
         function UpdateRecognizedPhrase(json) {
