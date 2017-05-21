@@ -1,31 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
     <title>Speech Sample</title>
     <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.min.css" />
+
+    <style>
+        .container-fluid .row {
+            padding: 0rem 1rem;
+        }
+        .vcenter {
+            margin-top: 0.5rem;
+        }
+
+    </style>
+
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"> </script>
 </head>
 <body style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px;">
-    <table width="100%">
-        <tr>
-            <td></td>
-            <td>
-                <h1 style="font-weight:500;">Speech Recognition</h1>
-                <h2 style="font-weight:500;">Microsoft Cognitive Services</h2>
-            </td>
-        </tr>
-        <tr style="display: none;">
-            <td ><a href="https://www.microsoft.com/cognitive-services/en-us/sign-up" target="_blank">Subscription</a>:</td>
-            <td ><input id="key" type="text" size="40" value="3e057acdb3254a6e944766609a2ebaee"></td>
-        </tr>
-        	<td align="right">Photo url:</td>
-            <td><input id="picture_url" type="text" size="40" value=""></td>
-        <tr>
-        </tr>
-        <tr>
-            <td align="right">Laguage:</td>
-            <td align="left">
-                <select id="languageOptions">
+    
+    <p>&nbsp;</p>
+
+    <div class="container-fluid well" style="width: 80%; margin-left: 10%">
+        <div class="row">
+            <h3 style="font-weight:500;">Speech Recognition ( Cognitive Services )</h3>
+        </div>
+        <div class="row" style="display: none;">
+            <div class="col-md-3 col-md-offset-1">
+                <a href="https://www.microsoft.com/cognitive-services/en-us/sign-up" target="_blank">Subscription</a>:
+            </div>
+            <div class="col-md-3">
+                <input id="key" type="text" size="40" value="3e057acdb3254a6e944766609a2ebaee">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 vcenter">
+                <p>Photo url:</p>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" id="picture_url" type="text" value="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 vcenter">
+                <p>Language:</p>
+            </div>
+            <div class="col-md-3">
+                <select id="languageOptions" class="form-control">
                     <option value="zh-CN">Chinese - CN</option>
                     <option value="en-GB">English - GB</option>
                     <option value="en-US" selected="selected">English - US</option>
@@ -34,41 +58,49 @@
                     <option value="it-IT">Italian - IT</option>
                     <option value="es-ES">Spanish - ES</option>
                 </select>
-            </td>
-        </tr>
-        <tr>
-            <td align="right">Format:</td>
-            <td align="left">
-                <select id="formatOptions">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 vcenter">
+                <p>Format:</p>
+            </div>
+            <div class="col-md-3">
+                <select id="formatOptions" class="form-control">
                     <option value="Simple" selected="selected">Simple Result</option>
                     <option value="Detailed">Detailed Result</option>
                 </select>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <button id="startBtn" disabled="disabled">Start</button>
-                <button id="stopBtn" disabled="disabled">Stop</button>
-            </td>
-        </tr>
-        <tr style="display: none;">
-            <td></td>
-            <td>Current hypothesis: <span id="hypothesisDiv"></span></td>
-        </tr>
-        <tr style="display: none;">
-            <td></td>
-            <td>
-                <textarea id="phraseDiv" style="width:500px;height:200px"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>Status: <span id="statusDiv"></span></td>
-        </tr>
-         <tr id="result">
-        </tr>
-    </table>
+            </div>
+        </div>
+
+        <div class="row">
+            &nbsp;
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 col-md-offset-3">
+                <button class="btn btn-raised btn-primary" id="startBtn" disabled="disabled">Start</button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-raised btn-primary" id="stopBtn" disabled="disabled">Stop</button>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="container-fluid well" style="width: 80%; margin-left: 10%">
+        <div class="row" style="display: none;">
+            Current hypothesis: <span id="hypothesisDiv"></span>
+        </div>
+        <div class="row" style="display: none;">
+            <textarea id="phraseDiv" style="width:500px;height:200px"></textarea>
+        </div>
+        <div class="row">
+            Status: <span id="statusDiv"></span>
+        </div>
+        <div class="row" id="result">
+        </div>
+    </div>
+
 
     <!-- The SDK has a dependency on requirejs (http://requirejs.org/). -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
