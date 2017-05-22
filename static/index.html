@@ -283,12 +283,12 @@
 	        	var tags = [];
 	        	var result = "";
 	        	var ok = false;
-	        	console.log(text);
-                console.log(data);
+	        	// console.log(text);
+                // console.log(data);
                 language = document.getElementById("languageOptions").value;
                 translation = get_translation(text, "en-US");
-                console.log("PAAAMMMM")
-                console.log(translation);
+                // console.log("PAAAMMMM")
+                // console.log(translation);
 	        	for (var i = 0; i < data.tags.length; ++i) {
 	        		name = data.tags[i]["name"];
 	        		tags.push(name);
@@ -317,19 +317,19 @@
                 },
                 type: 'POST',
                 success: function(data) {
-                    console.log("token");
+                    // console.log("token");
                     //translated = data.text;
                     bearer_token = 'Bearer ' + data;
-                    console.log(bearer_token);
+                    // console.log(bearer_token);
                     // headers = {"Authorization": bearer_token}
                     translateUrl = 'https://api.microsofttranslator.com/v2/Http.svc/Translate?text=' + text + '&to=en&appId=' + bearer_token;
-                    console.log(translateUrl);
+                    // console.log(translateUrl);
                     $.ajax({
                         async: false,
                         url: encodeURI(translateUrl),
                         type: 'GET',
                         success: function(data) {
-                            console.log("Translateeeed");
+                            // console.log("Translateeeed");
                             //xml = $.parseXML(data);
                             translated = data.getElementsByTagName('string')[0]['textContent'];
                         }
