@@ -292,11 +292,10 @@
                 translation = get_translation(text, "en-US");
                 console.log("PAAAMMMM")
                 console.log(translation);
-                console.log(translated);
 	        	for (var i = 0; i < data.tags.length; ++i) {
 	        		name = data.tags[i]["name"];
 	        		tags.push(name);
-	        		if (text.search(name) != -1) {
+	        		if (translation.search(name) != -1) {
 	        			ok = true;
 	        			result += name + " ";
 	        		}
@@ -310,8 +309,9 @@
         }
 
         function get_translation(text, lang) {
-            translated = "paam"
+            var translated = "paam"
             $.ajax({
+                async: false,
                 url: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken',
                 beforeSend: function(xhrObj) {
                     // xhrObj.setRequestHeader("Content-Type","application/json");
@@ -327,19 +327,13 @@
                     translateUrl = 'https://api.microsofttranslator.com/v2/Http.svc/Translate?text=' + text + '&to=en&appId=' + bearer_token;
                     console.log(translateUrl);
                     $.ajax({
+                        async: false,
                         url: encodeURI(translateUrl),
-                        // beforeSend: function(xhrObj) {
-                        //     xhrObj.setRequestHeader("Authorization ", "Bearer" + " " + data);
-                        //     xhrObj.setRequestHeader("appId ", "");
-                        // },
-                        // headers: {
-                        //     'Authorization': bearer_token
-                        // },
                         type: 'GET',
                         success: function(data) {
                             console.log("Translateeeed");
                             //xml = $.parseXML(data);
-                            console.log(data.getElementsByTagName('string'));
+                            translated = data.getElementsByTagName('string')[0]['textContent'];
                         }
                     });
                 }
